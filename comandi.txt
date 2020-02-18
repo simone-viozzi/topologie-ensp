@@ -74,7 +74,7 @@ q
 
 dhcp enable
 interface gig 0/0/1
-ip address 10.10.11.1 24
+ip address 96.45.64.193 26
 dhcp select interface
 q
 
@@ -121,6 +121,55 @@ q
 
 <----------------------------------
 
+
+---------------------------------->
+		ospf + mpls ldp		 		  
+-----------------------------------
+
+interface LoopBack1
+ip address 8.8.8.8 32 
+
+mpls lsr-id 8.8.8.8
+
+mpls
+
+mpls ldp
+
+mpls
+lsp-trigger all  
+q
+
+
+interface gig 0/0/0
+ip address 96.45.65.30 30
+mpls
+mpls ldp
+q
+
+ospf 1 router-id 8.8.8.8
+import-route direct
+area 0
+network 8.8.8.8 0.0.0.0
+network 96.45.65.29 0.0.0.3
+q
+q
+
+<----------------------------------
+
+
+interface gig 0/0/2
+ip address 96.45.65.1 29
+mpls
+mpls ldp
+q
+
+ospf 1 router-id 8.8.8.8
+import-route direct
+area 0
+network 8.8.8.8 0.0.0.0
+network 96.45.65.2 0.0.0.7
+q
+q
 
 
 ---------------------------------->
